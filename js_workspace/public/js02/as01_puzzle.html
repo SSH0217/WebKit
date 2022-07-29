@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#puzzle {
+            border: 3px solid black;
+            width: 400px;
+            height: 400px;
+        }
+        #puzzle div.cell {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            box-sizing: border-box;
+            float: left;
+            text-align: center;
+            line-height: 100px;
+            margin: 0;
+        }
+    </style>
+    <script>
+        class PuzzleGame {
+            constructor() {
+                this.puzzle = null;
+                this.cells = [];
+                this.firstSelected = true;
+                this.firstSelectedValue = null;
+                this.secondeSelectedValue = null;
+                this.canClick = true;
+                this.init();
+            }
+            init() {
+                this.body = document.body;
+                this.body.innerHTML = `<h1>Puzzle</h1><hr>`;
+                this.puzzle = document.createElement("div");
+                this.puzzle.id = "puzzle";
+                this.body.appendChild(this.puzzle);
+                for(var i = 0; i < 16; i++){
+                    var cell = document.createElement("div");
+                    cell.className = "cell";
+                    cell.innerText = i;
+                    this.puzzle.appendChild(cell);
+                    this.cells.push(cell);
+                }
+                this.cells.forEach(function(item, i){
+                    item.innerHTML = String.fromCharCode(i%8+65);
+                });
+            }
+            swap(i, j) {
+                let temp = this.cells[i].innerText;
+                this.cells[i].innerText = this.cells[j].innerText;
+                this.cells[j].innerText = temp;
+            }
+            compare(cell) {
+                //첫번째 클릭 cell.data-ch와 두번째클릭 cell.data-ch비교
+                //같으면 남기고 다르면 숨김
+                cell.isOpen = true;
+                if(this.canClick){
+                    if(this.firstSelected) {
+                        this.firstSelectedValue = cell;
+                        cell.innerHTML = cell.ch;
+                        this.firstSelected = false;
+                    }
+                    else {
+                        this.secondeSelectedValue = cell;
+                        cell.innerHTML = cell.ch;
+                        this.canClick = false;
+                        if(this.firstSelectedValue.ch != this.secondeSelectedValue.ch) {
+                            setTimeout(()=>{
+                                this.firstSelectedValue.innerHTML = "";
+                                this.secondeSelectedValue.innerHTML = "";
+                                this.firstSelectedValue.isOpen = false;
+                                this.secondeSelectedValue.isOpen = false;
+                                this.canClick = true;
+                            }, 2000)
+                        }
+                        else{
+                            setTimeout(()=>{
+                                this.canClick = true;
+                            }, 2000);
+                        }
+                        this.firstSelected = true;
+                    }
+                }
+                
+            }
+            start() {
+                //console.log(this.cells);
+                //console.log(puzzle);
+                for(let i = 0; i < 100 ; i++) {
+                    let idx1 = Math.abs(Math.floor(Math.random()*16))
+                    let idx2 = Math.abs(Math.floor(Math.random()*16))
+                    this.swap(idx1, idx2)
+                }
+                setTimeout(()=>{
+                    this.cells.forEach((item, i) => {
+                        item['ch'] = item.innerText;
+                        item['isOpen'] = false;
+                        item.innerText = "";
+                        item.addEventListener('click', (e)=>{
+                            if(!item.isOpen) {
+                                this.compare(e.currentTarget);
+                            }
+                        });
+                    });
+                }, 4000)
+            }
+
+        }
+        function main() {
+            new PuzzleGame().start();
+        }
+        window.addEventListener("load", main);
+    </script>
+</head>
+<body>
+    
+
+</body>
+</html>

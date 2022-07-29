@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#messageBox {
+            border: 1px solid black;
+            width: 400px;
+            height: 200px;
+            background-color: beige;
+        }
+    </style>
+</head>
+<body>
+    <div id="messageBox">---Message 입력---</div>
+    <input type="text" id="messageInput" value="HelloWorld">
+    <input type="button" value="Send" id="sendBtn">
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        let messageBox = document.querySelector("#messageBox");
+        let messageInput = document.querySelector('#messageInput');
+        let sendBtn = document.querySelector('#sendBtn');
+
+        const socket = io.connect('http://localhost:3000');
+        socket.on('connect', function(data){
+            messageBox.innerHTML += "<br>서버 소켓과 연결"
+            
+            sendBtn.onclick = function(e) {
+                var message = messageInput.value;
+                socket.emit('client-message', {sender:'user01', message: message});
+            }
+            
+            socket.on('news', function(data){
+                messageBox.innerHTML += "<br>"+data['message'];
+            });
+        })
+    </script>
+</body>
+</html>

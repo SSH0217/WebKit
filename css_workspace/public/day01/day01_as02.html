@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        thead{
+            background-color: orange;
+        }
+        #need-b{
+            border: 1px solid black;
+        }
+        #search{
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        #comment{
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+        #comment-up{
+            width: 100%;
+        }
+        #info{
+            border: 0px;
+        }
+    </style>
+</head>
+<body>
+    <table id="info">
+        <tr>
+            <td>이름</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>부서</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>직책</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>사진</td>
+            <td><input type="file"></td>
+        </tr>
+    </table>
+    <br>
+    <input type="submit" value="새 사원 추가">
+    <br>
+    <br>
+    <table id="del">
+            <td><input type="button" value="선택 삭제"></td>
+            <td>|검색:</td>
+            <td>
+                <select name="분류">
+                    <option value="이름">이름</option>
+                    <option value="부서">부서</option>
+                    <option value="직급">직급</option>
+                </select>
+            </td>
+            <td><input type="text"></td>
+    </table>
+    <table id="search">
+        <thead>
+            <td id="need-b"><input type="checkbox"></td>
+            <td id="need-b">번호</td>
+            <td id="need-b">사진</td>
+            <td id="need-b">사원명</td>
+            <td id="need-b">부서</td>
+            <td id="need-b">직급</td>
+            <td id="need-b">수정</td>
+            <td id="need-b">삭제</td>
+        </thead>
+        <tr>
+            <td rowspan="3" id="need-b"><input type="checkbox"></td>
+            <td rowspan="3" id="need-b">1043</td>
+            <td id="need-b"><img src="https://img.freepik.com/free-photo/white-cloud-on-blue-sky_74190-2381.jpg?size=626&ext=jpg" width="100px" height="100px" alt=""></td>
+            <td id="need-b">홍길동</td>
+            <td id="need-b">개발</td>
+            <td id="need-b">대리</td>
+            <td rowspan="3" id="need-b"><input type="button" value="edit"></td>
+            <td rowspan="3" id="need-b"><input type="button" value="delete"></td>
+        </tr>
+        <tr>
+            <td colspan="4" id="need-b">
+                <table id="comment">
+                    <tr>
+                        <th>번호</th>
+                        <th>댓글 내용</th>
+                        <th>작성자</th>
+                        <th>수정</th>
+                        <th>삭제</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>멋진 사진입니다.</td>
+                        <td>박문수</td>
+                        <td>수정</td>
+                        <td>삭제</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>좋아요^^퍼가요~</td>
+                        <td>일지매</td>
+                        <td>수정</td>
+                        <td>삭제</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" id="need-b">
+                <table id="comment-up">
+                    <td>댓글</td>
+                    <td><input type="text"></td>
+                    <td>작성자</td>
+                    <td><input type="text"></td>
+                    <td><input type="button" value="댓글입력"></td>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

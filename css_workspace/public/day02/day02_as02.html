@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <table>
+            <tr>
+                <td>제목: </td>
+                <td><input type="text" id="title"></td>
+            </tr>
+            <tr>
+                <td>이름: </td>
+                <td><input type="text" id="name"></td>
+            </tr>
+            <tr>
+                <td>내용: </td>
+                <td><textarea cols="30" rows="5" id="content"></textarea></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="저장" id="save"></td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        let titleInput = document.querySelector("#title");
+        let nameInput = document.querySelector("#name");
+        let contentInput = document.querySelector("#content");
+        let saveBtn = document.querySelector("#save");
+
+        let getAjaxSave = function(title, name, content) {
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {}
+            let dataStr = `http://localhost:3000/save/${title}/${name}/${content}`;
+            xhr.open("GET", dataStr, true);
+            xhr.send();
+            return 0;
+        }
+
+        let saveServer = () => {
+            getAjaxSave(titleInput.value, nameInput.value, contentInput.value);
+        }
+
+        saveBtn.onclick = saveServer;
+
+    </script>
+</body>
+</html>

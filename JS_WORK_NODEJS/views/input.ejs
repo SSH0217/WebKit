@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('header.ejs') %>
+    <!-- end of header -->
+    <div class="container">
+        <h1>중고차 등록</h1>
+        <form action="input" method="post">
+            <table class="table table-bordered">
+                <tr>
+                    <th>차종</th>
+                    <td><input type="text" name="name" value="TEST"></td>
+                </tr>
+                <tr>
+                    <th>가격</th>
+                    <td><input type="text" name="price" value="15000"></td>
+                </tr>
+                <tr>
+                    <th>회사</th>
+                    <td><input type="text" name="company" value="TESLA"></td>
+                </tr>
+                <tr>
+                    <th>연식</th>
+                    <td><input type="text" name="year" value="2019"></td>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <input type="submit" value="등록">
+                    </th>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</body>
+
+</html>

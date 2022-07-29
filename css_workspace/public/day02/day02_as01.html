@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #header {
+            text-align: center;
+        }
+        .nav-ul{
+            overflow: hidden;
+            background-color: orange;
+            list-style: none;
+            padding: 0;
+        }
+        .nav-ul > li{
+            background-color: aqua;
+            float: left;
+            width: 16%;
+            height: 40px;
+            line-height: 40px;
+            box-sizing: border-box;
+            margin: 2%;
+        }
+        #middle {
+            display: flex;
+            margin: 3%;
+        }
+        aside {
+            width: 20%;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            background-color: skyblue;
+            margin-right: 2%;
+            margin-left: 2%;
+        }
+        section{
+            padding-top: 20px;
+            width: 50%;
+            height: 200px;
+            background-color: greenyellow;
+            text-align: center;
+        }
+        article{
+            text-align: center;
+            background-color: skyblue;
+            width: 80%;
+            height: 30px;
+            line-height: 30px;
+            margin: 10px auto;
+            border: 1px blacks;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <header id="header">
+            <h1>Welcome to My Homepage</h1>
+            <nav>
+                <ul class="nav-ul">
+                    <li>Home</li>
+                    <li>Profile</li>
+                    <li>Gallery</li>
+                    <li>Lecture</li>
+                    <li>Shop</li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <div id="middle">
+        <aside>
+            left aside
+        </aside>
+        <section>
+            <article>
+                article 1
+            </article>
+            <article>
+                article 2
+            </article>
+            <article>
+                article 3
+            </article>
+        </section>
+        <aside>
+            right aside
+        </aside>
+    </div>
+    <footer>
+        <hr>
+        footer
+    </footer>
+</body>
+</html>

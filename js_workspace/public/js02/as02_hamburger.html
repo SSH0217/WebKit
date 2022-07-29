@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#hamburgerHouse {
+            border: 3px solid black;
+            width: 900px;
+            height: 300px;
+            overflow: hidden;
+        }
+        .hamburger {
+            width: 300px;
+            height: 2700px;
+            float: left;
+            position: relative;
+            top: 0;
+        }
+        .patty {
+            width: 300px;
+            height: 300px;
+            border: 1px solid brown;
+            box-sizing: border-box;
+            text-align: center;
+            line-height: 300px;
+            margin: 0;
+            color: white;
+            font-size: 10em;
+        }
+        #tryButton {
+            width: 100px;
+            height: 40px;
+            margin: 10px;
+            font-size: 2em;
+        }
+    </style>
+    <script>
+        class Hamburger {
+            constructor() {
+                this.hamburger = null;
+                this.patties = []; 
+                this.init();
+            }
+            init(){
+                this.hamburger = document.createElement("div");
+                this.hamburger.className = "hamburger";
+
+                for(let i = 0; i < 9; i++){
+                    let patty = document.createElement("div");
+                    patty.className = "patty";
+                    patty.id = `patty${i}`;
+                    patty.style.backgroundColor = "#"+i+"9"+i%4;
+                    patty.innerHTML = i;
+                    this.hamburger.appendChild(patty);
+                    this.patties.push(patty);
+                }
+            }
+            move() {
+                let x = 0;
+                let target = Math.floor(Math.random()*10000 / 300) * 300;
+                let hamburger = this.hamburger;
+    
+                let interval = setInterval(function() {
+                    x -= 300;
+                    hamburger.style.top = x + "px";
+                    if(x <= -(target%2700) ) {
+                        clearInterval(interval);
+                        hamburger.style.top = -(target%2700) + "px";
+                    }
+                }, 1000/30);
+            }
+        }
+
+        class HamburgerHouse {
+            constructor() {
+                this.hamburgerHouse = null;
+                this.slot1 = null;
+                this.slot2 = null;
+                this.slot3 = null;
+                this.tryButton = null;
+                this.init();
+            }
+            init() {
+                this.body = document.body;
+                this.hamburgerHouse = document.createElement("div");
+                this.slot1 = new Hamburger();
+                this.slot2 = new Hamburger();
+                this.slot3 = new Hamburger();
+                this.tryButton = document.createElement("button");
+
+                this.hamburgerHouse.id = "hamburgerHouse";
+                this.tryButton.id = "tryButton";
+                this.tryButton.innerHTML = "Try";
+
+                this.hamburgerHouse.appendChild(this.slot1.hamburger);
+                this.hamburgerHouse.appendChild(this.slot2.hamburger);
+                this.hamburgerHouse.appendChild(this.slot3.hamburger);
+                
+                this.body.appendChild(this.hamburgerHouse);
+                this.body.appendChild(this.tryButton);
+
+                this.tryButton.addEventListener("click", ()=>{
+                    this.slot1.move();
+                    this.slot2.move();
+                    this.slot3.move();
+                });
+            }
+        }
+        function main() {
+            new HamburgerHouse()
+        }
+        window.addEventListener("load", main);
+    </script>
+</head>
+<body>
+    <h1>Hamburger House</h1>
+    <hr>
+</body>
+</html>

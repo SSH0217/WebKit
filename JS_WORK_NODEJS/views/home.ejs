@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('header.ejs') %>
+    <!-- end of header -->
+    <div class="container">
+        <h1>중고차 목록</h1>
+        <table class="table table-bordered">
+            <tr>
+                <th>번호</th>
+                <th>차종</th>
+                <th>가격</th>
+                <th>제조사</th>
+                <th>연식</th>
+            </tr>
+            <% carList.forEach(function(car){ %>
+                <tr>
+                    <td>
+                        <%=car.cno %>
+                    </td>
+                    <td>
+                        <a href="/detail/<%=car.cno %>">
+                            <%=car.name%>
+                        </a>
+                    </td>
+                    <td>
+                        <%=car.price%>
+                    </td>
+                    <td>
+                        <%=car.company%>
+                    </td>
+                    <td>
+                        <%=car.year%>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+
+    </div>
+</body>
+
+</html>

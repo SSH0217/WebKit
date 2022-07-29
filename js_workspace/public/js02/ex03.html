@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var saramList = [
+            { no: 1001, name: '홍길동', score: 100 },
+            { no: 1022, name: '김길동', score: 80 },
+            { no: 1053, name: '이길동', score: 90 },
+            { no: 1044, name: '박길동', score: 95 },
+            { no: 1055, name: '강길동', score: 75 }
+        ];
+
+        var saram = null;
+        for (var i = 0; i < saramList.length; i++) {
+            if (saramList[i].no == 1053) {
+                saram = saramList[i];
+            }
+        }
+        console.dir(saram);
+
+        var saram = null;
+        saramList.forEach(function (item, i) {
+            //console.log(item);
+            if (item.no == 1053) {
+                saram = item;
+            }
+        });
+        console.log(saram);
+
+        // 조건에 맞는 항목이 list배열에 push
+        var list = saramList.filter(function (item) {
+            return item.no == 1053;
+        });
+        console.log(list);
+
+        var idx = saramList.findIndex(function (item) {
+            return item.no == 1053;
+        });
+        console.log(idx);
+        console.log(saramList[idx]);
+        //검색한 idx 위치를 삭제
+        console.log(saramList);
+        saramList.splice(idx, 1);
+        console.log(saramList);
+    </script>
+</body>
+
+</html>

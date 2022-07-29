@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas#myCanvas {
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="640" height="480"></canvas>
+
+    <script>
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+
+        var drawing =false;
+
+        ctx.linestyle = "black";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+
+        canvas.addEventListener("mousedown", (e) => {
+            drawing = true;
+            ctx.moveTo(e.offsetX, e.offsetY);
+        });
+
+        canvas.addEventListener("mousemove", (e) => {
+            if(drawing) {
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            }
+        });
+
+        canvas.addEventListener("mouseup", (e) => {
+            drawing = false;
+        });
+
+    </script>
+    
+</body>
+</html>

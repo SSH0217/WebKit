@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <input type="file" class="file" id="imageSelector" name="imageSelector"
+            accept="image/jpeg, image/jpg, image/png" multiple>
+    </form>
+    <div id="preview-image"></div>
+
+    <script>
+        var fileInput = document.getElementById("imageSelector");
+
+        function readImage(input) {
+            if (input.files && input.files[0]) {
+                for (var i = 0; i < input.files.length; i++) {
+                    const reader = new FileReader();
+
+                    reader.onload = (e) => {
+                        let readFileURL = e.target.result;
+                        const previewImageDiv = document.getElementById("preview-image");
+                        previewImageDiv.innerHTML += `
+                        <div>
+                            <img src="${readFileURL}" width="200">
+                            <input type="button" class="deleteBtn" value="Delete"/>
+                        </div>`;
+                        
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+
+        function makeDeleteBtn(i) {
+            for (var j = 0; j < i; j++) {
+            }
+        }
+
+        fileInput.onchange = (e) => {
+            readImage(e.currentTarget);
+            const deleteBtn = document.querySelectorAll(".delteBtn")
+            console.log(deleteBtn)
+            
+            deleteBtn.forEach(function(button){
+                button.addEventListener("click", (e) => {
+                    console.log("Deleting...");
+                    console.log(e.currentTarget.parentNode);
+                    e.currentTarget.parentNode.remove();
+                });
+            })
+        }
+    </script>
+</body>
+
+</html>

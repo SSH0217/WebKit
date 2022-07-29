@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no,
+        maximum-scale=1.0, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 3px;
+            padding: 3px;
+            border: 1px solid gray;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        body, div.contents {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background-color: pink;
+        }
+
+        section, aside {
+            float: left;
+            height: 400px;
+            background-color: white;
+        }
+
+        footer {
+            clear: both;
+            background-color: white;
+        }
+
+        aside {
+            width: 20%;
+        }
+        
+        section {
+            width: 55%
+        }
+
+        section > p {
+            height: 200px;
+        }
+
+        @media screen and (max-width: 767px) {
+            body {
+                background-color: skyblue;
+            }
+            section, aside {
+                float: none;
+                width: 99%;
+            }
+            aside {
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contents">
+        <header>header</header>
+        <nav>menu</nav>
+        <aside>left side</aside>
+        <section>
+            <p>main</p>
+            <article>content1</article>
+            <article>content2</article>
+            <article>content3</article>
+        </section>
+        <aside>right side</aside>
+        <footer>
+            footer
+        </footer>
+
+    </div>
+</body>
+
+</html>

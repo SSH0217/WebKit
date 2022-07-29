@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#messageBox {
+            border: 1px solid black;
+            width: 540px;
+            height: auto;
+            background-color: beige;
+        }
+        #myCanvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="540" height="300"></canvas>
+    <hr>
+    <div id="messageBox">---Message 입력---</div>
+    <input type="text" id="messageInput" value="HelloWorld">
+    <input type="button" value="Send" id="sendBtn">
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        let messageBox = document.querySelector("#messageBox");
+        let messageInput = document.querySelector('#messageInput');
+        let sendBtn = document.querySelector('#sendBtn');
+
+        const socket = io.connect('http://localhost:3000');
+        socket.on('connect', function(data){
+            messageBox.innerHTML += "<br>서버 소켓과 연결"
+            
+            sendBtn.onclick = function(e) {
+                var message = messageInput.value;
+                socket.emit('client-message', {sender:'user01', message: message});
+            }
+            
+            socket.on('news', function(data){
+                messageBox.innerHTML += "<br>"+data['message'];
+            });
+
+            var isTrue = false;
+            socket.on('start', (data)=> {
+                
+                ctx.moveTo(data.x, data.y);
+                isTrue = true;
+            });
+            socket.on('draw', (data)=> {
+                if(isTrue) {
+                    console.log(data);
+                    ctx.lineTo(data.x, data.y);
+                    ctx.stroke();
+                }
+            });
+            socket.on("end", (data)=>{
+                isTrue = false;
+            });
+        });
+    </script>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        var drawing = false;
+
+        ctx.lineStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.beginPath();        
+
+        canvas.addEventListener('mousedown', (e)=> {
+            drawing = true;
+            //ctx.moveTo(e.pageX-8, e.pageY-8);
+            //ctx.moveTo(e.offsetX, e.offsetY);
+            socket.emit('message', {status:'start', x:e.offsetX, y:e.offsetY});
+        });
+
+        canvas.addEventListener('mousemove', (e)=> {
+            if(drawing) {
+            //    //ctx.lineTo(e.pageX-8, e.pageY-8);
+            //    ctx.lineTo(e.offsetX, e.offsetY);
+            //    ctx.stroke();
+                socket.emit('message', {status:'draw', x:e.offsetX, y:e.offsetY});
+            }
+        });
+
+        canvas.addEventListener('mouseup', (e)=> {
+            drawing = false;
+            socket.emit('message', {status:'end', x:e.offsetX, y:e.offsetY});
+        });
+    </script>
+</body>
+</html>
