@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="box">box</div>
+    <p class="box">Hello</p>
+    <div class="box">World</div>
+    
+    <div class="status">좋아!좋아!</div>
+
+    <script>
+        var _$ = function (selector) {
+            var dom = document.querySelectorAll(selector);
+            var obj = {};
+            obj.dom = dom;
+            obj.color = function(color) {
+                for(var i = 0; i < this.dom.length; i++) {
+                    this.dom[i].style.color = color;
+                }
+                return this;
+            }
+            obj.border = function(data) {
+                for(var i = 0; i < this.dom.length; i++) {
+                    this.dom[i].style.border = data;
+                }
+                return this;
+            }
+            obj.size = function(data) {
+                for(var i = 0; i < this.dom.length; i++) {
+                    this.dom[i].style.width = data.width;
+                    this.dom[i].style.height = data.height;
+                }
+                return this;
+            }
+            obj.moveTo = function(data) {
+                for(var i = 0; i < this.dom.length; i++) {
+                    this.dom[i].style.position = "absolute";
+                    var box = this.dom[i];
+                    var xpos = box.offsetLeft;
+                    var inter = setInterval(function () {
+                        xpos += 1;
+                        if (xpos >= parseInt(data.left)) {
+                            clearInterval(inter);
+                            xpos = data.left;
+                        }
+                        box.style.left = xpos + "px";
+                    }, 10);
+                }
+                return this;
+            }
+            return obj;
+        }
+
+        _$(".box").color("red").border("5px solid blue");
+        _$(".status").color("orange").border("3px solid red");
+        _$(".status").size({'width': '100px', 'height': '100px'}).moveTo({'left': '500px'});
+
+    </script>
+</body>
+</html>
