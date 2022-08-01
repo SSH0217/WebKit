@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //localstorage에 저장
+        localStorage.setItem("user", "서승환");
+        //저장된 데이터 불러오기
+        var user = localStorage.getItem("user");
+        document.write(`<h3>user : ${user}</h3>`);
+
+        //객체 저장
+        var listSample = [
+            {user:'Kim', age: 25},
+            {user:'Lee', age: 27},
+            {user:'Park', age: 23}
+        ]
+        //스토리지는 객체를 문자열로 변환해서 저장
+        localStorage.setItem("listSample", JSON.stringify(listSample));
+        var newList = localStorage.getItem("listSample");
+        var objList = JSON.parse(newList);
+        console.dir(objList);
+    </script>
+</body>
+</html>
