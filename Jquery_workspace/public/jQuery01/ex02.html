@@ -41,8 +41,8 @@
                 return this;
             }
             obj.moveTo = function(data) {
-                for(var i = 0; i < this.dom.length; i++) {
-                    this.dom[i].style.position = "absolute";
+                /*for(var i = 0; i < this.dom.length; i++) {
+                    his.dom[i].style.position = "absolute";
                     var box = this.dom[i];
                     var xpos = box.offsetLeft;
                     var inter = setInterval(function () {
@@ -53,6 +53,26 @@
                         }
                         box.style.left = xpos + "px";
                     }, 10);
+                }*/
+                obj.loop(function(el) {
+                    var target = parseInt(data.left);
+                    var x = el.offsetLeft;
+                    el.style.position = "relative";
+                    el.style.transition = 'left .3s ease-in-out';
+                    var interval = setInterval(function() {
+                        x += 10;
+                        if(x>target) {
+                            el.style.left = target + "px";
+                            clearInterval(interval);
+                        }
+                        el.style.left = x + "px";
+                    }, 30);
+                })
+                return this;
+            }
+            obj.loop = function(callback) {
+                for(var i=0; i<this.dom.length; i++) {
+                    callback(this.dom[i]);
                 }
                 return this;
             }
