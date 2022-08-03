@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sapCURD</title>
+    <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+    <script src="./bootstrap/jquery.slim.min.js"></script>
+    <script src="./bootstrap/popper.min.js"></script>
+    <script src="./bootstrap/bootstrap.bundle.min.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-app.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.9.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+</head>
+</head>
+
+<body>
+    <div class="container p-3 my-3 border bg-dark text-white">
+        <h1>Please Remember Me</h1>
+        <p>I want to remain in your memory no matter how many year pass.</p>
+        <p>You own photo sharing service</p>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="col-sm-6">
+            <form action="#" id="submitFile">
+                
+                ID      <input type="text" value="guest1" name="id">
+                <br>
+                NAME    <input type="text" value="guest1" name="id">
+                <br>
+                EMAIL   <input type="text" value="guest1" name="id">
+                <br>
+                PHOTO   <input type="file" name="id">
+                <br>
+                PASSWORD <input type="password" value=""><input type="submit" name="submit" value="SAVE"><input type="submit" name="update" value="UPDATE">
+    
+            </form>
+
+        </div>
+        <div class="col-sm-6">
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+              const app = firebase.app();
+              const db = firebase.firestore();
+              const storage = firebase.storage();
+      
+              //console.log(app);
+              //console.log(db);
+              //console.log(storage);
+              //db.collection("car").get().then((querySnapshot) => {
+              //  querySnapshot.forEach((doc) => {
+              //    console.log(`${doc.id} => ${doc.data().name}`);
+              //  });
+              //});
+      
+              let carList = [];
+              function mkTable() {
+                db.collection("car").get().then((querySnapshot) => {
+                  carList = [];
+                  $('#carListTable tbody').html('');
+                  querySnapshot.forEach((doc) => {
+                    var car = doc.data();
+                    car.id = doc.id;
+                    carList.push(car);
+      
+                    $('#carListTable tbody').append(`<tr>
+                        <td>${car.id}</td>
+                        <td>${car.name}</td>
+                        <td>${car.company}</td>
+                        <td>${car.year}</td>
+                        <td>${car.price}</td>
+                      </tr>`);
+                  });
+      
+                  $('#carForm').submit(function (e) {
+                    e.preventDefault();
+                    let carData = {
+                      name: this.name.value,
+                      company: this.company.value,
+                      year: this.year.value,
+                      price: this.price.value
+                    }
+      
+                    // 입력된 정보를 db에 저장
+                    //console.log(carData);
+                    db.collection("car").add(carData).then((docRef) => {
+                      // 저장 후 테이블 리스트 갱신.
+                      mkTable()
+                    }).catch((error) => {
+                      console.error("Error adding document: ", error);
+                    });
+      
+                  });
+                });
+              }
+              mkTable()
+            } catch (e) {
+              console.error(e);
+              loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+            }
+          });
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBPf5Kkl4BlQM6xwq0B5uDYL6WQ6P1ZLPc",
+            authDomain: "webkit-test-19c74.firebaseapp.com",
+            projectId: "webkit-test-19c74",
+            storageBucket: "webkit-test-19c74.appspot.com",
+            messagingSenderId: "173797992870",
+            appId: "1:173797992870:web:e5f82f8069b05eda3d4767"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</body>
+
+</html>
