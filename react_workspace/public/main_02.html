@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function TestProps(props) {
+            console.log(props);
+            return (<>
+                <h3>{props.title}</h3>
+                <p>{props.user}</p>
+            </>);
+        }
+
+        function MyList(props) {
+            return (<div>
+                <ul>
+                    {
+                        props.list.map((item, idx) => {
+                            return <li key={idx}>{item}</li>;
+                        })
+                    }
+                </ul>
+            </div>);
+        }
+
+        // 컴포넌트 속성은 임의로 Naming해서 사용
+        function App() {
+            let name = "홍길동";
+            let fishList = ['오징어', '꼴뚜기', '대구', '명태']
+            let saramList = ['서길동', '방길동', '한길동', '니길동'];
+            return (<>
+                    <h1>Hello World!</h1>
+                    <TestProps user={name} title="props연습"/>
+                    <MyList list={fishList}/>
+                    <MyList list={saramList}/>
+            </>);
+        }
+
+
+        ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+</body>
+
+</html>

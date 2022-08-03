@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        //function 이름이 태그가됨
+        function MyList() {
+            let saramList = ['서길동', '방길동', '한길동', '니길동'];
+            return (<>
+                <ul>
+                    {
+                        // 자바스크립트 내의 JSP 안에 다시 Javascript 작성
+                        // JSX와 JS문장의 구분은 중괄호
+                        saramList.map((name, idx) => {
+                            return <li key={idx}>{name}</li>
+                        })
+                    }
+                </ul>
+            </>);
+        }
+        function MyList2() {
+            let listItems = [
+                <li key="1">오징어</li>,
+                <li key="2">꼴뚜기</li>,
+                <li key="3">대구</li>
+            ];
+            return (<>
+                <h3>Fish List</h3>
+                <ul>{listItems}</ul>
+            </>);
+        }
+        function Hello() {
+            return (<>
+                    <h1>Hello World!</h1>
+                    <h3>Welcome to my homepage</h3>
+                    <MyList />
+                    <MyList2 />
+            </>);
+        }
+
+
+        ReactDOM.render(<Hello />, document.getElementById('root'))
+    </script>
+</body>
+
+</html>
