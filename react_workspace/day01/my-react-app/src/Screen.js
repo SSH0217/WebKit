@@ -5,7 +5,7 @@ function InputMovie({ movieList, setMovieList, movieLength }) {
     no: movieLength + 1,
     title: "testMovie",
     openDate: "2022.08.30",
-    score: "3"
+    score: "3",
   });
   var tempTitle = "";
   var tempOpenDate = "";
@@ -30,13 +30,12 @@ function InputMovie({ movieList, setMovieList, movieLength }) {
       />
       <button
         onClick={(e) => {
-            if(tempTitle != "" && tempOpenDate != "") {
-                setMovie(movie.no = movieLength + 1);
-                setMovie(movie.title = tempTitle);
-                setMovie(movie.openDate = tempOpenDate);
-                setMovieList([...movieList, movie]);
-
-            }
+          if (tempTitle != "" && tempOpenDate != "") {
+            setMovie((movie.no = movieLength + 1));
+            setMovie((movie.title = tempTitle));
+            setMovie((movie.openDate = tempOpenDate));
+            setMovieList([...movieList, movie]);
+          }
         }}
       >
         저장
@@ -64,13 +63,15 @@ function Screen() {
       <hr />
       <label>검색 : </label>
       <input type="text" />
-      <table>
+      <table className="table table-striped">
         <thead>
-          <th>순서</th>
-          <th>영화 제목</th>
-          <th>개봉 날짜</th>
-          <th>별점</th>
-          <th>삭제</th>
+          <tr key="movieTableHead">
+            <th>순서</th>
+            <th>영화 제목</th>
+            <th>개봉 날짜</th>
+            <th>별점</th>
+            <th>삭제</th>
+          </tr>
         </thead>
         <tbody>
           {movieList.map((movie, index) => {
