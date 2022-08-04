@@ -3,3 +3,6 @@ MPA : Multi pagge application
 
 Map은 각 Array의 아이템 별로 function을 실행 하고 그 결과를 return하지만
 forEach는 아이템별로 기능만 실행하고 결과값이 return하지 않는다.  => Component 출력 불가
+
+react init
+-- npx create-react-app 폴더이름(소문자)(현재폴더시 .)

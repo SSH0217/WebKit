@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 function InputMovie({ movieList, setMovieList, movieLength }) {
   const [movie, setMovie] = useState({
-    no: 0,
+    no: movieLength + 1,
     title: "testMovie",
     openDate: "2022.08.30",
     score: "3"
   });
-  var tempTitle = "need title";
-  var tempOpenDate = "need openDate";
+  var tempTitle = "";
+  var tempOpenDate = "";
   return (
     <div>
       <label>영화 제목 : </label>
@@ -30,11 +30,13 @@ function InputMovie({ movieList, setMovieList, movieLength }) {
       />
       <button
         onClick={(e) => {
-          setMovie(movie.no = movieLength + 1);
-          setMovie(movie.title = tempTitle);
-          setMovie(movie.openDate = tempOpenDate);
-          console.log(movie);
-          setMovieList([...movieList, movie]);
+            if(tempTitle != "" && tempOpenDate != "") {
+                setMovie(movie.no = movieLength + 1);
+                setMovie(movie.title = tempTitle);
+                setMovie(movie.openDate = tempOpenDate);
+                setMovieList([...movieList, movie]);
+
+            }
         }}
       >
         저장
