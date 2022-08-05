@@ -14,3 +14,4 @@ npm install @mui/icons-material
 
 react-router
 npm install --save react-router-dom
+route는 routes안에
