@@ -6,3 +6,8 @@ forEach는 아이템별로 기능만 실행하고 결과값이 return하지 않�
 
 react init
 -- npx create-react-app 폴더이름(소문자)(현재폴더시 .)
+
+mui
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/material @mui/styled-engine-sc styled-components
+npm install @mui/icons-material
