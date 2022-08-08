@@ -4,17 +4,11 @@ import { authService, dbService, storageService } from "../firebase.conf";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
-  const [carList, setCarList] = useState([]);
   
   function logginEffect() {
     authService.onAuthStateChanged((user)=>{
       setIsLoggedIn(user);
     })
-  }
-
-  function loadCarList() {
-    const carCollection = dbService.collection('car');
-
   }
   
   useEffect(() => {
