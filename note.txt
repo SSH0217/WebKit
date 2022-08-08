@@ -18,6 +18,25 @@ route는 routes안에
 
 
 
-=====================================================================
+===============================================================
 
+oracle사용으로 backend 실습은 c:\backend_workspace에 있음
 
+cmd C:\Users\user 
+sqlplus system/1234
+
+clear screen  <== cls
+
+SQL> create table sosi (
+  2  id number(4) primary key,
+  3  name varchar2(10),
+  4  salary number ,
+  5  birth date,
+  6  email varchar2(20),
+  7  grade varchar2(4)
+  8  );
+
+  edit c:\backend_workspace\sosi.sql
+  start "
+
+  나머진 backend_workspace에
