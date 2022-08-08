@@ -13,7 +13,6 @@ function App() {
   
   useEffect(() => {
     logginEffect();
-    loadCarList();
   }, [])
 
   async function onLogin(email, password) {

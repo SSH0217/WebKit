@@ -10,11 +10,11 @@ const Home = ({ onLogout }) => {
   const [price, setPrice] = useState(0);
 
   async function loadCarList() {
-    const carCollection = await dbService.collection("car").get();
-    carCollection.forEach((doc) => {
-      let car = doc.data();
-      car.id = doc.id;
-      setCarList(...carList, car);
+    dbService.collection("car").onSnapshot((snapshot) => {
+      let newCarList = snapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+      });
+      setCarList(newCarList);
     });
   }
   useEffect(() => {
@@ -46,24 +46,57 @@ const Home = ({ onLogout }) => {
         <tbody>
           <tr>
             <td>
-              <input id="name" type="text" value={name} onChange={(e) => {setName(e.currentTarget.value)}}/>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => {
+                  setName(e.currentTarget.value);
+                }}
+              />
             </td>
             <td>
-              <input id="company" type="text" value={company} onChange={(e) => {setCompany(e.currentTarget.value)}} />
+              <input
+                id="company"
+                type="text"
+                value={company}
+                onChange={(e) => {
+                  setCompany(e.currentTarget.value);
+                }}
+              />
             </td>
             <td>
-              <input id="year" type="text" value={year} onChange={(e) => {setYear(e.currentTarget.value)}} />
+              <input
+                id="year"
+                type="text"
+                value={year}
+                onChange={(e) => {
+                  setYear(e.currentTarget.value);
+                }}
+              />
             </td>
             <td>
-              <input id="price" type="text" value={price} onChange={(e) => {setPrice(e.currentTarget.value)}} />
+              <input
+                id="price"
+                type="text"
+                value={price}
+                onChange={(e) => {
+                  setPrice(e.currentTarget.value);
+                }}
+              />
             </td>
             <th>
-              <input onClick={(e) => {
+              <input
+                onClick={(e) => {
                   //firebase store에 바로 데이터 추가
                   const newCar = {};
 
-                  dbService.collection('car').add(newCar);
-              }} id="addBtn" type="button" value="추가" />
+                  dbService.collection("car").add(newCar);
+                }}
+                id="addBtn"
+                type="button"
+                value="추가"
+              />
             </th>
           </tr>
         </tbody>
@@ -80,7 +113,20 @@ const Home = ({ onLogout }) => {
             <th>삭제</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          {carList.map((car) => (
+            <tr key={car.id}>
+              <td>{car.id}</td>
+              <td>{car.name}</td>
+              <td>{car.company}</td>
+              <td>{car.year}</td>
+              <td>{car.price}</td>
+              <td>
+                <button>삭제</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
