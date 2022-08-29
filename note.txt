@@ -40,3 +40,5 @@ SQL> create table sosi (
   start "
 
   나머진 backend_workspace에
+
+select sysdate from dual;  //dual은 더미 테이블
